@@ -20,22 +20,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const titleText = document.querySelector('.title-text');
     const subtitleContainer = document.querySelector('.subtitle-container');
 
-    // 背景画像が読み込まれた後にアニメーション開始
+    // FVスライドショー設定
     const kvImage = document.querySelector('.kv-image');
+    const fvImages = [
+        'Assets/KV_1440px.png',
+        'Assets/KV2_1440px.png',
+        'Assets/KV3_1440px.png'
+    ];
+    let currentImageIndex = 0;
+
     if (kvImage) {
-        const img = new Image();
-        img.onload = () => {
+        // 最初の画像を設定
+        kvImage.style.backgroundImage = `url('${fvImages[0]}')`;
+        
+        // 画像のプリロード
+        fvImages.forEach((imagePath, index) => {
+            const img = new Image();
+            img.src = imagePath;
+        });
+
+        // スライドショー開始
+        const changeImage = () => {
+            // フェードアウト
+            kvImage.classList.add('fade-out');
+            
             setTimeout(() => {
-                if (subtitleText) subtitleText.classList.add('visible');
-            }, 500);
-            setTimeout(() => {
-                if (titleText) titleText.classList.add('visible');
-            }, 700);
-            setTimeout(() => {
-                if (subtitleContainer) subtitleContainer.classList.add('visible');
-            }, 900);
+                // 次の画像に切り替え
+                currentImageIndex = (currentImageIndex + 1) % fvImages.length;
+                kvImage.style.backgroundImage = `url('${fvImages[currentImageIndex]}')`;
+                
+                // フェードイン
+                kvImage.classList.remove('fade-out');
+            }, 1000); // フェードアウト完了後に画像を切り替え
         };
-        // SVG画像の場合は即座に実行
+
+        // 5秒ごとに画像を切り替え
+        setInterval(changeImage, 5000);
+
+        // テキストアニメーション開始
         setTimeout(() => {
             if (subtitleText) subtitleText.classList.add('visible');
             setTimeout(() => {
@@ -111,12 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // ヘッダーのスクロール時の挙動
     let lastScroll = 0;
     const header = document.querySelector('.header');
+    const fvSection = document.querySelector('.fv');
+    
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-        if (currentScroll > 100) {
+        const fvHeight = fvSection ? fvSection.offsetHeight : 810;
+        
+        if (currentScroll > fvHeight) {
+            // FVセクションを過ぎたら背景を表示
             header.style.backgroundColor = 'rgba(17, 17, 17, 0.98)';
         } else {
-            header.style.backgroundColor = 'rgba(17, 17, 17, 0.95)';
+            // FVセクション内では透明
+            header.style.backgroundColor = 'transparent';
         }
         lastScroll = currentScroll;
     });
@@ -162,4 +190,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // テキストリンクのチカチカアニメーション（CSSで実装済み）
 // blinkアニメーションはCSSで定義されているため、追加のJavaScriptは不要
+
 
