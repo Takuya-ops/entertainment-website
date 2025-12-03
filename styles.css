@@ -65,7 +65,7 @@ body {
 
 .nav-link:hover {
     opacity: 0.5;
-    animation: blink 0.3s ease-in-out;
+    animation: blink 0.15s ease-in-out infinite;
 }
 
 @keyframes blink {
@@ -765,7 +765,7 @@ body {
 }
 
 .link-button:hover {
-    animation: blink 0.3s ease-in-out;
+    animation: blink 0.15s ease-in-out infinite;
 }
 
 /* Making */
@@ -889,7 +889,10 @@ body {
 
 .news-item:hover {
     border-bottom-color: rgba(255, 255, 255, 0.6);
-    animation: blink 0.3s ease-in-out;
+}
+
+.news-item:hover .news-description {
+    animation: blink 0.15s ease-in-out infinite;
 }
 
 .news-date {
@@ -1037,7 +1040,7 @@ body {
 
 .social-icon:hover {
     opacity: 0.7;
-    animation: blink 0.3s ease-in-out;
+    animation: blink 0.15s ease-in-out infinite;
 }
 
 /* Responsive */
