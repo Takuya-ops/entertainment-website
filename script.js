@@ -149,18 +149,18 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     });
 
-    // 動画プレイヤーのホバーエフェクト
+    // 動画プレイヤーのホバーエフェクト（Trailerセクション）
     const movie = document.querySelector('.movie');
-    const playButton = document.querySelector('.play-button');
+    const playButton = document.querySelector('.movie .play-button');
     
     if (movie && playButton) {
         movie.addEventListener('mouseenter', () => {
             const overlay = document.createElement('div');
             overlay.style.position = 'absolute';
-            overlay.style.top = '10px';
-            overlay.style.left = '10px';
-            overlay.style.width = 'calc(100% - 20px)';
-            overlay.style.height = 'calc(100% - 20px)';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
             overlay.style.backgroundColor = 'rgba(17, 17, 17, 0.4)';
             overlay.style.zIndex = '5';
             overlay.classList.add('movie-overlay');
@@ -168,8 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const playBtnSvg = playButton.querySelector('svg');
             if (playBtnSvg) {
-                playBtnSvg.style.width = '120px';
-                playBtnSvg.style.height = '120px';
+                playBtnSvg.classList.add('play-button-hover');
             }
         });
 
@@ -181,11 +180,49 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const playBtnSvg = playButton.querySelector('svg');
             if (playBtnSvg) {
-                playBtnSvg.style.width = '100px';
-                playBtnSvg.style.height = '100px';
+                playBtnSvg.classList.remove('play-button-hover');
             }
         });
     }
+
+    // 動画プレイヤーのホバーエフェクト（Makingセクション）
+    const makingImages = document.querySelectorAll('.making-image');
+    
+    makingImages.forEach(makingImage => {
+        const makingPlayButton = makingImage.querySelector('.play-button');
+        
+        if (makingPlayButton) {
+            makingImage.addEventListener('mouseenter', () => {
+                const overlay = document.createElement('div');
+                overlay.style.position = 'absolute';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(17, 17, 17, 0.4)';
+                overlay.style.zIndex = '5';
+                overlay.classList.add('movie-overlay');
+                makingImage.appendChild(overlay);
+                
+                const playBtnSvg = makingPlayButton.querySelector('svg');
+                if (playBtnSvg) {
+                    playBtnSvg.classList.add('play-button-hover');
+                }
+            });
+
+            makingImage.addEventListener('mouseleave', () => {
+                const overlay = makingImage.querySelector('.movie-overlay');
+                if (overlay) {
+                    overlay.remove();
+                }
+                
+                const playBtnSvg = makingPlayButton.querySelector('svg');
+                if (playBtnSvg) {
+                    playBtnSvg.classList.remove('play-button-hover');
+                }
+            });
+        }
+    });
 });
 
 // テキストリンクのチカチカアニメーション（CSSで実装済み）

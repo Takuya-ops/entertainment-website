@@ -415,11 +415,29 @@ body {
     height: 100px;
     cursor: pointer;
     z-index: 10;
-    transition: transform 0.3s ease;
+    transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease;
 }
 
 .play-button:hover {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%);
+}
+
+.play-button svg {
+    width: 100px;
+    height: 100px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.movie:hover .play-button,
+.making-image:hover .play-button {
+    width: 120px;
+    height: 120px;
+}
+
+.movie:hover .play-button svg,
+.making-image:hover .play-button svg {
+    width: 120px;
+    height: 120px;
 }
 
 /* Story */
@@ -833,6 +851,23 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 10;
+    transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease;
+}
+
+.making-image .play-button svg {
+    width: 80px;
+    height: 80px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.making-image:hover .play-button {
+    width: 96px;
+    height: 96px;
+}
+
+.making-image:hover .play-button svg {
+    width: 96px;
+    height: 96px;
 }
 
 .making-description {
